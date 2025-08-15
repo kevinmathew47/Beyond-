@@ -48,7 +48,7 @@ export default function RootLayout({
             <div className="min-h-screen bg-background text-foreground">
               {children}
             </div>
-            <ClientProviders />
+{/* <ClientProviders /> */}
           </QueryProvider>
           <Toaster />
         </ThemeProvider>
