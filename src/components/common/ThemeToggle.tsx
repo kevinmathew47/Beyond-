@@ -1,9 +1,9 @@
 "use client";
 
-import * as React from "react";
+import { Button } from "@/components/ui/button";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
-import { Button } from "@/components/ui/button";
+import * as React from "react";
 
 export function ThemeToggle() {
   const { setTheme, theme } = useTheme();
@@ -13,18 +13,24 @@ export function ThemeToggle() {
     setMounted(true);
   }, []);
 
-  if (!mounted) return null; // Prevent hydration mismatch flicker
+  if (!mounted) {
+    return (
+      <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
+        <div className="h-3 w-3" />
+      </Button>
+    );
+  }
 
   return (
     <Button
       variant="ghost"
-      className="dark:hover:bg-white dark:hover:text-black hover:bg-gray-200 hover:text-gray-900 relative flex h-8 w-8 items-center justify-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2"
-      size="icon"
+      size="sm"
+      className="h-8 w-8 p-0 hover:bg-muted focus-ring"
       onClick={() => setTheme(theme === "light" ? "dark" : "light")}
       aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
     >
-      <Sun className="h-[1.2rem] bg- w-[1.2rem] rotate-0 scale-100 transition-all duration-200 dark:-rotate-90 dark:scale-0" />
-      <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all duration-200 dark:rotate-0 dark:scale-100" />
+      <Sun className="h-3 w-3 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+      <Moon className="absolute h-3 w-3 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
     </Button>
   );
 }
